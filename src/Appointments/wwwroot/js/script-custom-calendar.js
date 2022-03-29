@@ -35,7 +35,6 @@ function InitializeCalendar() {
                         type: 'GET',
                         dataType: 'JSON',
                         success: function (response) {
-                            debugger;
                             var events = [];
                             if (response.status === 1) {
                                 $.each(response.dataenum, function (i, data) {
@@ -83,11 +82,31 @@ function onShowModal(obj, isEventDetails) {
         $("#doctorId").val(obj.doctorId);
         $("#patientId").val(obj.patientId);
         $("#id").val(obj.id);
+        $("#lblPatiantName").html(obj.patientName);
+        $("#lblDoctorName").html(obj.doctorName);
+        $("#lblDoctorName").html(obj.doctorName);
+        if (obj.isDoctorApproved) {
+            $("#lblStatus").html("Approved");
+        } else {
+
+            $("#lblStatus").html("Pending");
+        }
+    } else {
+        $("#appointmentDate").val(obj.startStr + " " + new moment().format("hh:mm A"));
+        $("#id").val(0);
     }
     $("#appointmentInput").modal("show");
 }
 
 function onCloseModal() {
+    $("#appointmentForm")[0].reset();
+    $("#id").val(0);
+    $("#title").val("");
+    $("#description").val("");
+    $("#appointmentDate").val("");
+    $("#duration").val("");
+    $("#patientId").val("");
+
     $("#appointmentInput").modal("hide");
 }
 
