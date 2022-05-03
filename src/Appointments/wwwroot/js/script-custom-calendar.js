@@ -184,3 +184,49 @@ function getEventDetailsByEventId(info) {
 function OnDoctorChange() {
     calendar.refetchEvents();
 }
+
+function onDeleteAppointment() {
+    var id = parseInt($("#id").val);
+
+    $.ajax({
+        url: routeUrl + '/api/Appointment/DeleteAppointment/' + id,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (response) {
+            if (response.status === 1) {
+                $.notify(response.message, "success");
+                calendar.refetchEvents();
+                onCloseModal();
+            }
+            else {
+                $.notify(response.message, "error");
+            }
+        },
+        error: function () {
+            $.notify('Error', 'error');
+        }
+    });
+}
+
+function onConfirm() {
+    var id = parseInt($("#id").val);
+
+    $.ajax({
+        url: routeUrl + '/api/Appointment/ConfirmEvent/' + id,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (response) {
+            if (response.status === 1) {
+                $.notify(response.message, "success");
+                calendar.refetchEvents();
+                onCloseModal();
+            }
+            else {
+                $.notify(response.message, "error");
+            }
+        },
+        error: function () {
+            $.notify('Error', 'error');
+        }
+    });
+}
