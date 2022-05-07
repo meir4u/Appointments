@@ -29,22 +29,22 @@ namespace Appointments.Services
 
             if(model != null && model.Id > 0)
             {
-                var entity = _db.Appointments.FirstOrDefault(item => item.Id == model.Id);
-                if(entity != null)
+                //update
+                var appointment = _db.Appointments.FirstOrDefault(x => x.Id == model.Id);
+                if (appointment != null)
                 {
-                    entity.Title = model.Title;
-                    entity.Description = model.Description;
-                    entity.StartDate = startDate;
-                    entity.EndDate = endDate;
-                    entity.Duration = model.Duration;
-                    entity.DoctorId = model.DoctorId;
-                    entity.PatientId = model.PatientId;
-                    entity.IsDoctorApproved = model.IsDoctorApproved;
-                    entity.AdminId = model.AdminId;
+                    appointment.Title = model.Title;
+                    appointment.Description = model.Description;
+                    appointment.StartDate = startDate;
+                    appointment.EndDate = endDate;
+                    appointment.Duration = model.Duration;
+                    appointment.DoctorId = model.DoctorId;
+                    appointment.PatientId = model.PatientId;
+                    appointment.IsDoctorApproved = model.IsDoctorApproved;
+                    appointment.AdminId = model.AdminId;
                     await _db.SaveChangesAsync();
 
                 }
-                //update
                 return 1;
             }
             else

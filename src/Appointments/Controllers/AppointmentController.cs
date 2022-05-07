@@ -1,5 +1,6 @@
 ﻿using Appointments.Services;
 using Appointments.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Appointments.Controllers
 {
+    [Authorize]
     public class AppointmentController : Controller
     {
         private IAppointmentService _appointmentService;
